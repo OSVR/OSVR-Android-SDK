@@ -29,7 +29,7 @@ cd $ROOT
 echo "OSVR_ABIS := $abis" > NDK/osvr_abis.mk
 
 # Update all the tests with the full ABI list.
-cd NDK-tests
+cd NDK-test
 for dir in *; do
     appmk="${dir}/jni/Application.mk"
     echo "APP_ABI := $abis" >> $appmk
