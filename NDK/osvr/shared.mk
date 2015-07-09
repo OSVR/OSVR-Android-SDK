@@ -2,8 +2,9 @@ OSVR_LIB_TYPE := SHARED
 OSVR_LIB_SUFFIX := so
 OSVR_TARGET_ARCH_ABI := $(TARGET_ARCH_ABI)
 
-OSVR_LIBS_DIR := $(OSVR_ROOT)/$(OSVR_TARGET_ARCH_ABI)/lib
-OSVR_INCLUDES_DIR := $(OSVR_ROOT)/$(OSVR_TARGET_ARCH_ABI)/include
+OSVR_BUILD_DIR := $(OSVR_ROOT)/builds/$(OSVR_TARGET_ARCH_ABI)
+OSVR_LIBS_DIR := $(OSVR_BUILD_DIR)/lib
+OSVR_INCLUDES_DIR := $(OSVR_BUILD_DIR)/include
 
 
 include $(CLEAR_VARS)
@@ -31,6 +32,8 @@ define add_osvr_module
 endef
 
 ifeq ($(OSVR_SHARED_MK_INCLUDED),)
+    $(call ndk_log, boost $(wildcard $(NDK_ROOT)/sources/boost/*))
+
     OSVR_COMMON_LIBS := Client Connection PluginHost Server Util VRPNServer
     $(foreach module,$(OSVR_COMMON_LIBS),$(eval $(call add_osvr_module,$(module))))
     OSVR_SHARED_MK_INCLUDED := ON
