@@ -1,1 +1,3 @@
 /NDK/osvr/builds/
+/NDK-test/**/libs/
+/NDK-test/**/obj/
