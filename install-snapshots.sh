@@ -9,24 +9,28 @@ getMatrixField() {
 }
 
 ROOT=$(cd $(dirname $0) && pwd)
-
+ABILIST="$ROOT/abilist.txt"
 (
 cd $ROOT
+rm -rf $ABILIST
+
 builds=$(cd NDK/osvr/builds && pwd)
 abis=""
+
 cd snapshots
 for dir in *; do
     abi=$(echo $dir | getMatrixField ANDROID_ABI)
     echo "Moving build: $dir"
     echo "Detected ABI: $abi"
     abis="${abis} $abi"
+    echo "$abi" >> $ABILIST
     mv $dir/build/install $builds/$abi
 done
 
 cd $ROOT
 
 # Record list of ABIs
-echo "OSVR_ABIS := $abis" > NDK/osvr_abis.mk
+echo "OSVR_ABIS := $abis" > NDK/osvr/osvr_abis.mk
 
 # Update all the tests with the full ABI list.
 cd NDK-test
