@@ -23,7 +23,7 @@
 // limitations under the License.
 
 // Internal Includes
-#include <osvr/ClientKit/ClientKit.h>
+#include <osvr/ClientKit/ClientKitC.h>
 
 // Library/third-party includes
 // - none
